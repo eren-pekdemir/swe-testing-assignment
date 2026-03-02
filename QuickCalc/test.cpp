@@ -63,6 +63,29 @@ void testDividePositiveNumbers() {
     check("Divide positive numbers (10/2=5)", calc.divide(10, 2) == 5.0);
 }
 
+void testDivideByZero() {
+    Calculator calc;
+    bool threw = false;
+    try {
+        calc.divide(10, 0);
+    }
+    catch (const std::invalid_argument&) {
+        threw = true;
+    }
+    check("Divide by zero throws exception", threw);
+}
+
+void testDivideDecimalNumbers() {
+    Calculator calc;
+    double result = calc.divide(7.5, 2.5);
+    check("Divide decimal numbers (7.5/2.5=3.0)", std::abs(result - 3.0) < 0.0001);
+}
+
+void testMultiplyLargeNumbers() {
+    Calculator calc;
+    check("Multiply large numbers (1M*1M=1T)", calc.multiply(1000000, 1000000) == 1e12);
+}
+
 
 
 // ── Main ────────────────────────────────────────────────
@@ -80,6 +103,9 @@ int main() {
     testMultiplyPositiveNumbers();
     testMultiplyByZero();
     testDividePositiveNumbers();
+    testDivideByZero();
+    testDivideDecimalNumbers();
+    testMultiplyLargeNumbers();
 
     std::cout << "\n==============================" << std::endl;
     std::cout << "  Result: " << passedTests << "/" << totalTests << " passed" << std::endl;
