@@ -1,20 +1,54 @@
-// QuickCalc.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
+#include "QuickCalc.h"
+#include <sstream>
+#include <cmath>
 
-#include <iostream>
+Calculator::Calculator() : currentValue(0.0), displayValue("0") {}
 
-int main()
-{
-    std::cout << "Hello World!\n";
+double Calculator::add(double a, double b) const {
+    return a + b;
 }
 
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
+double Calculator::subtract(double a, double b) const {
+    return a - b;
+}
 
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
+double Calculator::multiply(double a, double b) const {
+    return a * b;
+}
+
+double Calculator::divide(double a, double b) const {
+    if (b == 0.0) {
+        throw std::invalid_argument("Cannot divide by zero");
+    }
+    return a / b;
+}
+
+double Calculator::calculate(double a, char op, double b) {
+    double result;
+
+    switch (op) {
+    case '+': result = add(a, b);      break;
+    case '-': result = subtract(a, b);  break;
+    case '*': result = multiply(a, b);  break;
+    case '/': result = divide(a, b);    break;
+    default:
+        throw std::invalid_argument(std::string("Invalid operator: ") + op);
+    }
+
+    currentValue = result;
+
+    return result;
+}
+
+void Calculator::clear() {
+    currentValue = 0.0;
+    displayValue = "0";
+}
+
+double Calculator::getCurrentValue() const {
+    return currentValue;
+}
+
+std::string Calculator::getDisplayValue() const {
+    return displayValue;
+}
