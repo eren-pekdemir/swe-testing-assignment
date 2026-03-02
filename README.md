@@ -14,7 +14,7 @@ A simple, clean command-line calculator application built with **C++17**. Quick-
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/<your-username>/swe-testing-assignment.git
+   git clone https://github.com/eren-pekdemir/swe-testing-assignment
    cd swe-testing-assignment/QuickCalc
    ```
 
