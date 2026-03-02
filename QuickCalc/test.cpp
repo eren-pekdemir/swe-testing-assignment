@@ -86,6 +86,26 @@ void testMultiplyLargeNumbers() {
     check("Multiply large numbers (1M*1M=1T)", calc.multiply(1000000, 1000000) == 1e12);
 }
 
+// ── Integration Tests ───────────────────────────────────
+
+void testFullAdditionWorkflow() {
+    Calculator calc;
+    double result = calc.calculate(5, '+', 3);
+    bool ok = (result == 8) &&
+        (calc.getCurrentValue() == 8) &&
+        (calc.getDisplayValue() == "8");
+    check("Full addition workflow (5+3=8, state updated)", ok);
+}
+
+void testClearAfterCalculation() {
+    Calculator calc;
+    calc.calculate(9, '*', 5);
+    calc.clear();
+    bool ok = (calc.getCurrentValue() == 0.0) &&
+        (calc.getDisplayValue() == "0");
+    check("Clear resets state after calculation", ok);
+}
+
 
 
 // ── Main ────────────────────────────────────────────────
@@ -106,6 +126,11 @@ int main() {
     testDivideByZero();
     testDivideDecimalNumbers();
     testMultiplyLargeNumbers();
+
+    std::cout << "\n[Integration Tests]" << std::endl;
+    testFullAdditionWorkflow();
+    testClearAfterCalculation();
+
 
     std::cout << "\n==============================" << std::endl;
     std::cout << "  Result: " << passedTests << "/" << totalTests << " passed" << std::endl;
