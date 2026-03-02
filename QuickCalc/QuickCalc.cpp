@@ -37,6 +37,16 @@ double Calculator::calculate(double a, char op, double b) {
 
     currentValue = result;
 
+    if (result == std::floor(result) && std::abs(result) < 1e15) {
+        std::ostringstream oss;
+        oss << static_cast<long long>(result);
+        displayValue = oss.str();
+    }
+    else {
+        std::ostringstream oss;
+        oss << result;
+        displayValue = oss.str();
+
     return result;
 }
 
