@@ -1,9 +1,4 @@
-﻿/**
- * Quick-Calc Test Suite
- * Simple test runner without external frameworks.
- * All unit and integration tests in a single file.
- */
-
+﻿
 #include <iostream>
 #include <string>
 #include <cmath>
